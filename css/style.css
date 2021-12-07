@@ -8,12 +8,28 @@ header, footer {
   color: salmon;
   font-size: x-large;
 }
+header > div {
+  display: inline-block;
+}
+#logo {
+  width: 5em;
+  float: left;
+}
+nav {
+  float: right;
+  width: 5em;
+  margin-top: 0.5em;
+  /* vertical-align: middle; */
+}
+img {
+  width: 95%;
+}
 main {
   color: aliceblue;
   padding: 1em;
   background-color: lightsalmon;
 }
-div {
+main > div {
   border: 2px solid aliceblue;
   border-radius: 7px;
   width: 250px;
