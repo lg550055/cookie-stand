@@ -18,7 +18,7 @@ function randomCount(min, max) {
   return Math.floor(Math.random()*(max-min+1)+min)
 }
 
-function headings() {
+function headings(total=true) {
   document.write("<tr>");
   document.write("<th></th>");
   for (let i=6; i<20; i++) {
@@ -28,19 +28,24 @@ function headings() {
       document.write("<th>"+`${i-12}pm`+"</th>");
     }
   }
-  document.write("<th>Day total</th>");
+  if (total) {
+    document.write("<th>Day total</th>");
+  }
   document.write("</tr>");
 }
+
 let hour = Array(14).fill(0);
+
 function hourlySales(store) {
   document.write("<tr>");
   document.write("<th>"+store.name+"</th>");
   let n = 0, count = 0;
   for (let i=6; i<20; i++) {
-    n = Math.round(store.avgPurch*randomCount(store.minCust,store.maxCust));
+    n = store.avgPurch*randomCount(store.minCust,store.maxCust);
+    store.eachHour.push(Math.round(n/store.avgPurch));
+    n = Math.round(n);
     count += n;
     hour[i-6] += n;
-    store.eachHour.push(n);
     document.write("<td>"+n+"</td>");
   }
   document.write("<td>"+count+"</td>");
@@ -59,11 +64,16 @@ function footings() {
   document.write("</tfoot>");
 }
 
-
-headings();
-hourlySales(seattle);
-hourlySales(tokyo);
-hourlySales(dubai);
-hourlySales(paris);
-hourlySales(lima);
-footings();
+function staff(store) {
+  document.write("<tr>");
+  document.write("<th>"+store.name+"</th>");
+  let n = 0, count = 0;
+  store.eachHour.forEach(e => {
+    if (e<=40) {
+      document.write("<td>2</td>");
+    } else {
+      document.write("<td>3</td>");
+    }
+  })
+  document.write("</tr>");  
+}
