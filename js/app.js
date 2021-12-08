@@ -5,6 +5,7 @@ function Store(name, min, max, avg) {
   this.minCust = min;
   this.maxCust = max;
   this.avgPurch = avg;
+  this.eachHour = [];
 }
 
 let seattle = new Store('Seattle',23,65,6.3);
@@ -17,26 +18,62 @@ function randomCount(min, max) {
   return Math.floor(Math.random()*(max-min+1)+min)
 }
 
-function hourlySales(store) {
-  document.write("<div>");
-  document.write(store.name);
-  document.write("<br>"+"<br>");
-  let n = 0, count = 0;
+function headings(total=true) {
+  document.write("<tr>");
+  document.write("<th></th>");
   for (let i=6; i<20; i++) {
-    n = Math.round(store.avgPurch*randomCount(store.minCust,store.maxCust));
-    count += n;
     if (i<13) {
-      document.write(`${i}am: ${n} cookies`+"<br>");
+      document.write("<th>"+`${i}am`+"</th>");
     } else {
-      document.write(`${i-12}pm: ${n} cookies`+"<br>");
+      document.write("<th>"+`${i-12}pm`+"</th>");
     }
   }
-  document.write("<br>"+`Total: ${count} cookies`);
-  document.write("</div>");
+  if (total) {
+    document.write("<th>Day total</th>");
+  }
+  document.write("</tr>");
 }
 
-hourlySales(seattle);
-hourlySales(tokyo);
-hourlySales(dubai);
-hourlySales(paris);
-hourlySales(lima);
+let hour = Array(14).fill(0);
+
+function hourlySales(store) {
+  document.write("<tr>");
+  document.write("<th>"+store.name+"</th>");
+  let n = 0, count = 0;
+  for (let i=6; i<20; i++) {
+    n = store.avgPurch*randomCount(store.minCust,store.maxCust);
+    store.eachHour.push(Math.round(n/store.avgPurch));
+    n = Math.round(n);
+    count += n;
+    hour[i-6] += n;
+    document.write("<td>"+n+"</td>");
+  }
+  document.write("<td>"+count+"</td>");
+  document.write("</tr>");
+}
+
+function footings() {
+  document.write("<tfoot>");
+  document.write("<tr>");
+  document.write("<th>Total</th>");
+  for (let i=6; i<20; i++) {
+    document.write("<td>"+hour[i-6]+"</td>");
+  }
+  document.write("<td>"+hour.reduce((a,b)=>a+b)+"</td>");
+  document.write("</tr>");
+  document.write("</tfoot>");
+}
+
+function staff(store) {
+  document.write("<tr>");
+  document.write("<th>"+store.name+"</th>");
+  let n = 0, count = 0;
+  store.eachHour.forEach(e => {
+    if (e<=40) {
+      document.write("<td>2</td>");
+    } else {
+      document.write("<td>3</td>");
+    }
+  })
+  document.write("</tr>");  
+}

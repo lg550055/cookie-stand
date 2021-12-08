@@ -26,17 +26,20 @@ img {
 }
 main {
   color: aliceblue;
-  padding: 1em;
+  padding: 3em 0;
   background-color: lightsalmon;
 }
-main > div {
-  border: 2px solid aliceblue;
-  border-radius: 7px;
-  width: 250px;
-  padding: 1.5em 0;
-  margin: 1em;
-  line-height: 1.1;
-  display: inline-block;
+table {
+  margin: 1em auto;
+  text-align: center;
+  font-size: small;
+  color: aliceblue;
+}
+th, td {
+  padding: 3px;
+}
+th, tfoot {
+  font-weight: bold;
 }
 button {
   border: none;
