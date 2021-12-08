@@ -1,46 +1,94 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
 body {
   background-color: aliceblue;
   text-align: center;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
+
 header, footer {
-  padding: 0.5em;
+  max-width: 960px;
+  margin: auto;
+  padding: 0.4em;
   color: salmon;
-  font-size: x-large;
 }
+
 header > div {
   display: inline-block;
 }
+
 #logo {
-  width: 5em;
+  width: 8em;
   float: left;
 }
+
+header img {
+  width: 80%;
+}
+
 nav {
   float: right;
-  width: 5em;
+  width: 8em;
   margin-top: 0.5em;
   /* vertical-align: middle; */
 }
-img {
-  width: 95%;
-}
+
 main {
   color: aliceblue;
-  padding: 3em 0;
   background-color: lightsalmon;
+  padding: 0.05em 0;
 }
+
+section {
+  max-width: 960px;
+  margin: 2em auto;
+  border: 1px solid aliceblue;
+}
+
+section img {
+  width: 15em;
+}
+
+section > div {
+  display: inline-block;
+  width: 30%;
+  border: 1px solid aliceblue;
+}
+
+article {
+  margin: 0 auto;
+  padding: 3em 0;
+  background-color: aliceblue;
+  color: lightsalmon;
+}
+
+article > div {
+  margin: 0 auto;
+  max-width: 960px;
+  padding-right: 1.25em;
+}
+
+article div img {
+  width: 40%;
+  float: left;
+  margin-right: 1.25em;
+}
+
 table {
   margin: 1em auto;
   text-align: center;
   font-size: small;
   color: aliceblue;
 }
+
 th, td {
   padding: 3px;
 }
+
 th, tfoot {
   font-weight: bold;
 }
+
 button {
   border: none;
   border-radius: 7px;
@@ -49,4 +97,7 @@ button {
   margin: 1em;
   color: lightsalmon;
 }
-p {font-size: medium;}
+
+h1 {font-size: 1.3em;}
+h2 {font: 1.15em Roboto;}
+h5 {font-size: medium;}
