@@ -23,21 +23,13 @@
     <h5>DAY HOURLY SALES</h5>
     <table>
       <script>headings();
-      hourlySales(seattle);
-      hourlySales(tokyo);
-      hourlySales(dubai);
-      hourlySales(paris);
-      hourlySales(lima);
+      renderLocations(locations);
       footings();</script>
     </table>
     <h5>HOURLY STAFFING</h5>
     <table>
       <script>headings(false);
-      staff(seattle);
-      staff(tokyo);
-      staff(dubai);
-      staff(paris);
-      staff(lima);
+      renderStaff(locations);
       </script>
     </table>
     <br><br>

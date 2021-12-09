@@ -1,4 +1,5 @@
 'use strict';
+let locations = [];
 
 function Store(name, min, max, avg) {
   this.name = name;
@@ -6,6 +7,7 @@ function Store(name, min, max, avg) {
   this.maxCust = max;
   this.avgPurch = avg;
   this.eachHour = [];
+  locations.push(this);
 }
 
 let seattle = new Store('Seattle',23,65,6.3);
@@ -35,7 +37,6 @@ function headings(total=true) {
 }
 
 let hour = Array(14).fill(0);
-
 function hourlySales(store) {
   document.write("<tr>");
   document.write("<th>"+store.name+"</th>");
@@ -50,6 +51,10 @@ function hourlySales(store) {
   }
   document.write("<td>"+count+"</td>");
   document.write("</tr>");
+}
+
+function renderLocations(storesList) {
+  storesList.forEach(store => hourlySales(store));
 }
 
 function footings() {
@@ -76,4 +81,12 @@ function staff(store) {
     }
   })
   document.write("</tr>");  
+}
+
+function renderStaff(storesList) {
+  storesList.forEach(store => staff(store));
+}
+
+function renderStoreButton(storesList) {
+  storesList.forEach(store => document.write("<button>"+store.name+"</button>"));
 }
