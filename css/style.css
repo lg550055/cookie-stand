@@ -85,12 +85,23 @@ table {
   color: aliceblue;
 }
 
-th, td {
-  padding: 3px;
+th, td { padding: 3px; }
+
+th, tfoot { font-weight: bold; }
+
+fieldset {
+  border: 1px solid aliceblue;
+  border-radius: 5px;
+  max-width: 500px;
+  margin: 2em auto;
+  padding: 0.5em 0 0;
 }
 
-th, tfoot {
-  font-weight: bold;
+input {
+  border: none;
+  border-radius: 5px;
+  max-width: 25%;
+  margin: 0.25em 0;
 }
 
 button {
@@ -101,8 +112,8 @@ button {
   color: lightsalmon;
 }
 
-h1 {font-size: 1.3em;}
-h2 {font: 1.15em Roboto;}
-h5 {font-size: medium;}
-main > h5 {margin-top: 3em;}
-img {border-radius: 7px;}
+h1 { font-size: 1.3em; }
+h2 { font: 1.15em Roboto; }
+h5 { font-size: medium; }
+main > h5 { margin-top: 3em; }
+img { border-radius: 7px; }

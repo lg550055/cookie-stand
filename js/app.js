@@ -90,3 +90,17 @@ function renderStaff(storesList) {
 function renderStoreButton(storesList) {
   storesList.forEach(store => document.write("<button>"+store.name+"</button>"));
 }
+
+setTimeout(()=>{
+  const myform = document.getElementById('store-form');
+  
+  function handleSubmit(event) {
+    event.preventDefault();
+    let newLocation = event.target.location.value;
+    newLocation = new Store(newLocation, event.target.minCust.value, event.target.maxCust.value, event.target.avgPurch.value);
+    console.log(newLocation);
+    myform.reset();
+  }
+
+  myform.addEventListener('submit', handleSubmit);  
+},1000);
