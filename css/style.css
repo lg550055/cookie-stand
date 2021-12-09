@@ -30,7 +30,6 @@ nav {
   float: right;
   width: 8em;
   margin-top: 0.5em;
-  /* vertical-align: middle; */
 }
 
 main {
@@ -41,23 +40,23 @@ main {
 
 section {
   max-width: 960px;
-  margin: 2em auto;
-  border: 1px solid aliceblue;
+  margin: 3.5em auto;
 }
 
-section img {
-  width: 15em;
+section > img {
+  width: 20em;
+  margin: 1em 0;
 }
 
 section > div {
   display: inline-block;
+  margin: 0 0.4em;
   width: 30%;
-  border: 1px solid aliceblue;
 }
 
 article {
   margin: 0 auto;
-  padding: 3em 0;
+  padding: 4em 0;
   background-color: aliceblue;
   color: lightsalmon;
 }
@@ -69,9 +68,14 @@ article > div {
 }
 
 article div img {
-  width: 40%;
+  width: 50%;
   float: left;
-  margin-right: 1.25em;
+  margin: 0.5em 1.25em;
+}
+
+section div img {
+  max-width: 95%;
+  margin-bottom: 0.7em;
 }
 
 table {
@@ -92,7 +96,6 @@ th, tfoot {
 button {
   border: none;
   border-radius: 7px;
-  /* background-color: aliceblue; */
   padding: 0.5em 1em;
   margin: 1em;
   color: lightsalmon;
@@ -101,3 +104,5 @@ button {
 h1 {font-size: 1.3em;}
 h2 {font: 1.15em Roboto;}
 h5 {font-size: medium;}
+main > h5 {margin-top: 3em;}
+img {border-radius: 7px;}
