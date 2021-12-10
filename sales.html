@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -21,18 +22,31 @@
   </header>
   <main>
     <h5>DAY HOURLY SALES</h5>
-    <table>
-      <script>headings();
-      renderLocations(locations);
-      footings();</script>
+    <table id="sales">
+      <script>renderLocations(locations);</script>
     </table>
     <h5>HOURLY STAFFING</h5>
-    <table>
-      <script>headings(false);
-      renderStaff(locations);
-      </script>
+    <table id="staff">
+      <script>renderStaff(locations);</script>
     </table>
-    <br><br>
+    <form id="store-form">
+      <fieldset>
+        <legend>ADD NEW LOCATION</legend>
+        <label for="location">Location name</label>
+        <input type="text" name="location">
+        <br>
+        <label for="minCust">Min # customers/hr</label>
+        <input type="number" min="0" name="minCust">
+        <br>
+        <label for="maxCust">Max # customers/hr</label>
+        <input type="number" min="0" name="maxCust">
+        <br>
+        <label for="avgPurch">Avg # cookies/cust</label>
+        <input type="number" min="0" step="0.1" name="avgPurch">
+        <br>
+        <button type="submit">Add Location</button>
+      </fieldset>
+    </form>
   </main>
   <footer>
     <button>About</button>
