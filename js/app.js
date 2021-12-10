@@ -20,26 +20,34 @@ function randomCount(min, max) {
   return Math.floor(Math.random()*(max-min+1)+min)
 }
 
-function headings(total=true) {
-  document.write("<tr>");
-  document.write("<th></th>");
+function headings(total=true, tableid) {
+  let row = document.createElement('tr');
+  row.appendChild(document.createElement('th'));
   for (let i=6; i<20; i++) {
     if (i<13) {
-      document.write("<th>"+`${i}am`+"</th>");
+      let th = document.createElement('th');
+      th.innerHTML = `${i}am`;
+      row.appendChild(th);
     } else {
-      document.write("<th>"+`${i-12}pm`+"</th>");
+      let th = document.createElement('th');
+      th.innerHTML = `${i-12}pm`;
+      row.appendChild(th);
     }
   }
   if (total) {
-    document.write("<th>Day total</th>");
+    let th = document.createElement('th');
+    th.innerHTML = 'Day Total';
+    row.appendChild(th);
   }
-  document.write("</tr>");
+  document.getElementById(tableid).appendChild(row);
 }
 
 let hour = Array(14).fill(0);
 function hourlySales(store) {
-  document.write("<tr>");
-  document.write("<th>"+store.name+"</th>");
+  let row = document.createElement('tr');
+  let th = document.createElement('th');
+  th.innerHTML = store.name;
+  row.appendChild(th);
   let n = 0, count = 0;
   for (let i=6; i<20; i++) {
     n = store.avgPurch*randomCount(store.minCust,store.maxCust);
@@ -47,43 +55,61 @@ function hourlySales(store) {
     n = Math.round(n);
     count += n;
     hour[i-6] += n;
-    document.write("<td>"+n+"</td>");
+    let td = document.createElement('td');
+    td.innerHTML = n;
+    row.appendChild(td);
   }
-  document.write("<td>"+count+"</td>");
-  document.write("</tr>");
-}
-
-function renderLocations(storesList) {
-  storesList.forEach(store => hourlySales(store));
+  let td = document.createElement('td');
+  td.innerHTML = count;
+  row.appendChild(td);
+  document.getElementById("sales").appendChild(row);
 }
 
 function footings() {
-  document.write("<tfoot>");
-  document.write("<tr>");
-  document.write("<th>Total</th>");
+  let row = document.createElement('tr');
+  let th = document.createElement('th');
+  th.innerHTML = 'Total';
+  row.appendChild(th);
   for (let i=6; i<20; i++) {
-    document.write("<td>"+hour[i-6]+"</td>");
+    let td = document.createElement('td');
+    td.innerHTML = hour[i-6];
+    row.appendChild(td);
   }
-  document.write("<td>"+hour.reduce((a,b)=>a+b)+"</td>");
-  document.write("</tr>");
-  document.write("</tfoot>");
+  let td = document.createElement('td');
+  td.innerHTML = hour.reduce((a,b)=>a+b);
+  row.appendChild(td);
+  let tfoot = document.createElement('tfoot')
+  tfoot.appendChild(row);
+  document.getElementById("sales").appendChild(tfoot);
+}
+
+function renderLocations(storesList) {
+  headings(true, "sales");
+  storesList.forEach(store => hourlySales(store));
+  footings();
 }
 
 function staff(store) {
-  document.write("<tr>");
-  document.write("<th>"+store.name+"</th>");
-  let n = 0, count = 0;
+  let row = document.createElement('tr');
+  let th = document.createElement('th');
+  th.innerHTML = store.name;
+  row.appendChild(th);
   store.eachHour.forEach(e => {
     if (e<=40) {
-      document.write("<td>2</td>");
+      let td = document.createElement('td');
+      td.innerHTML = 2;
+      row.appendChild(td);
     } else {
-      document.write("<td>3</td>");
+      let td = document.createElement('td');
+      td.innerHTML = 3;
+      row.appendChild(td);
     }
   })
-  document.write("</tr>");  
+  document.getElementById("staff").appendChild(row);
 }
 
 function renderStaff(storesList) {
+  headings(false, "staff");
   storesList.forEach(store => staff(store));
 }
 
@@ -93,14 +119,20 @@ function renderStoreButton(storesList) {
 
 setTimeout(()=>{
   const myform = document.getElementById('store-form');
+  if (myform) {
+    function handleSubmit(event) {
+      event.preventDefault();
+      let newLocation = event.target.location.value;
+      newLocation = new Store(newLocation, +event.target.minCust.value, +event.target.maxCust.value, +event.target.avgPurch.value);
+      document.getElementById("sales").innerHTML='';
+      document.getElementById("staff").innerHTML='';
+      hour = Array(14).fill(0);
+      locations.forEach(store => store.eachHour=[]);
+      renderLocations(locations);
+      renderStaff(locations);
+      myform.reset();
+    }
   
-  function handleSubmit(event) {
-    event.preventDefault();
-    let newLocation = event.target.location.value;
-    newLocation = new Store(newLocation, event.target.minCust.value, event.target.maxCust.value, event.target.avgPurch.value);
-    console.log(newLocation);
-    myform.reset();
-  }
-
-  myform.addEventListener('submit', handleSubmit);  
+    myform.addEventListener('submit', handleSubmit);  
+  }  
 },1000);

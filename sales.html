@@ -22,16 +22,12 @@
   </header>
   <main>
     <h5>DAY HOURLY SALES</h5>
-    <table>
-      <script>headings();
-      renderLocations(locations);
-      footings();</script>
+    <table id="sales">
+      <script>renderLocations(locations);</script>
     </table>
     <h5>HOURLY STAFFING</h5>
-    <table>
-      <script>headings(false);
-      renderStaff(locations);
-      </script>
+    <table id="staff">
+      <script>renderStaff(locations);</script>
     </table>
     <form id="store-form">
       <fieldset>
